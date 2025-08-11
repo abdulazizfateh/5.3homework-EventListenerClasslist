@@ -41,3 +41,9 @@ button {
     border: 1px solid #4a5565;
     padding: 0 18px;
 }
+
+.filter_btn {
+    height: 32px;
+    border: 1px solid #4a5565;
+    padding: 0 18px;
+}

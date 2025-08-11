@@ -3,9 +3,12 @@ const noToDoListEl = document.querySelector(".no_to_do_list");
 const toDoListsWrapperEl = document.querySelector(".to_do_list_wrapper");
 const addBtn = document.querySelectorAll(".add_btn");
 const checklistEl = document.querySelector(".checklist");
+const allBtn = document.querySelector(".all");
+const doneBtn = document.querySelector(".done");
+const toBeDoneBtn = document.querySelector(".to_be_done");
 
 let toDoData = JSON.parse(localStorage.getItem("data")) || [];
-const renderToDoData = () => {
+const renderToDoData = (filter) => {
     if (!toDoData.length) {
         toDoListEl.style.display = "none";
         noToDoListEl.style.display = "flex";
@@ -13,7 +16,16 @@ const renderToDoData = () => {
         noToDoListEl.style.display = "none";
         toDoListEl.style.display = "flex";
     }
-    toDoListsWrapperEl.innerHTML = toDoData.map(item => {
+
+    let filteredData = toDoData;
+    if (filter === "done") {
+        filteredData = toDoData.filter(item => item.done)
+    } else if (filter === "toBeDone") {
+        filteredData = toDoData.filter(item => !item.done)
+    }
+
+
+    toDoListsWrapperEl.innerHTML = filteredData.map(item => {
         return `
                 <div class="to_do" data-id="${item.id}">
                     <p>
@@ -21,7 +33,7 @@ const renderToDoData = () => {
                     </p>
                     <div class="flex items-center gap-4">
                         <button class="toggle_to_do border border-gray-400 size-6 flex items-center justify-center text-red-500">
-                           ${item.done ? `<img class="toggle_to_do size-5" src="./src/assets/checked.svg" alt="">` : ``}
+                            ${item.done ? `<img class="toggle_to_do size-5" src="./src/assets/checked.svg" alt="">` : ``}
                         </button>
                         <button class="delete_btn text-red-500">Delete</button>
                     </div>
@@ -81,3 +93,22 @@ const countCheckedToDo = () => {
     checklistEl.textContent = `${checklistData.length}/${toDoData.length} done`;
 }
 countCheckedToDo();
+
+
+
+
+allBtn.addEventListener("click", () => {
+    renderToDoData("all");
+    console.log(10);
+})
+
+
+doneBtn.addEventListener("click", () => {
+    renderToDoData("done");
+    console.log(11);
+})
+
+toBeDoneBtn.addEventListener("click", () => {
+    renderToDoData("toBeDone");
+    console.log(12);
+})
