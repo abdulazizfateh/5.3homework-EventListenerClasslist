@@ -95,20 +95,25 @@ const countCheckedToDo = () => {
 countCheckedToDo();
 
 
-
-
+allBtn.style.borderColor = "white";
 allBtn.addEventListener("click", () => {
+    allBtn.style.borderColor = "white";
+    doneBtn.style.borderColor = "";
+    toBeDoneBtn.style.borderColor = "";
     renderToDoData("all");
-    console.log(10);
 })
 
 
 doneBtn.addEventListener("click", () => {
+    allBtn.style.borderColor = "";
+    doneBtn.style.borderColor = "white";
+    toBeDoneBtn.style.borderColor = "";
     renderToDoData("done");
-    console.log(11);
 })
 
 toBeDoneBtn.addEventListener("click", () => {
+    allBtn.style.borderColor = "";
+    doneBtn.style.borderColor = "";
+    toBeDoneBtn.style.borderColor = "white";
     renderToDoData("toBeDone");
-    console.log(12);
 })
